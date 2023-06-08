@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tani.demo.dao.MemberDao">
+	
+	<select id="existsBynickname" resultType="boolean">
+		select count(*) from
+		Member
+		where nickname=#{nickname} and rownum&lt;=1
+	</select>
+
+	<select id="existsByemail" resultType="boolean">
+		select count(*) from Member
+		where email=#{email} and rownum&lt;=1
+	</select>
+
+	<select id="existsById" resultType="boolean">
+		select count(*) from Member
+		where username=#{username} and rownum&lt;=1
+	</select>
+	
+		<select id="existsBytel" resultType="boolean">
+		select count(*) from Member
+		where tel=#{tel} and rownum&lt;=1
+	</select>
+
+	<select id="findById"
+		resultType="com.tani.demo.entity.Member">
+		select * from Member where email=#{email} and name=#{name} <!-- 이름과 이름이 같은 
+			애의 전부를 가져옴. 그중 아이디 // email, name 입력-> 그에 맞는 아이디 출력 / 아이디찾기 -->
+		and rownum&lt;=1
+	</select>
+
+	<insert id="save">
+		insert into Member(username, password, name, email, nickname, <!--bprofile,--> tel, address
+		)
+		values(#{username}, #{password}, #{name}, #{email}, #{nickname}, <!--#{bprofile},--> #{tel}, #{address}
+	)
+	</insert>
+
+	<!-- 제목, 내용, 조회수, 좋아요, 싫어요, 댓글수 중 사용자가 선택한 컬럼을 변경 -->
+	<update id="update">
+		update Member set nickname=#{nickname}, password=#{password}, email=#{email}, tel=#{tel}, address=#{address} where username=#{username}
+	</update>
+
+	<update id="resetpw"> 
+		update Member set  password=#{password}
+		where username=#{username}
+	</update>
+	
+	<update id="changepw">
+		update Member set password=#{password}
+		where username=#{username}
+	</update>
+
+
+	<delete id="deleteById">
+		delete from Member where username=#{username}
+	</delete>
+
+	<select id="read" resultType="com.tani.demo.entity.Member">
+		select * from Member
+		where username=#{username}<!--dao 입력될 값 -->
+	</select>
+	
+	<select id="MemberInforRead" resultType="com.tani.demo.dto.MemberDto$Read">
+		select username, name, email, nickname, tel, address from Member where username =#{username} and rownum &lt;= 1
+	</select>
+	
+	
+	
+	<select id="userdataall" resultType="com.tani.demo.entity.Member">
+		select * from Member where username=#{username}
+	</select>
+	
+	<!-- 주문시 회원정보 가져오기  -->
+   <select id="MemberInfo" resultType="com.tani.demo.entity.Member">
+      select username, address, name, tel, email
+      from Member where username = #{username}
+   </select>
+
+	<!-- <delete id="deleteByUsernames"> delete from member where id in <foreach 
+		collection="ids" item="id" open="(" close=")" separator=","> #{id} </foreach> 
+		</delete> -->
+
+</mapper>
+
+

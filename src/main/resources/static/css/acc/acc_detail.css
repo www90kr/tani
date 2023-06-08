@@ -1,0 +1,188 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+body {
+	overflow-x: hidden;
+}
+/* 상세페이지 */
+#detail_content {
+	overflow-x: hidden;
+}
+
+
+.acc {
+	width: 500px;
+	height: 500px;
+}
+
+.mainImg {
+	width: 150px;
+	position: relative;
+	left: 80%;
+	top: 158px;
+}
+
+
+
+.name {
+	font-size: 32px;
+	font-weight: bold;
+}
+
+.hr {
+	width: 500px;
+}
+
+#detail{
+	list-style-type: none;
+	font-size: 20px;
+	width: 500px;
+	position: relative;
+	left: 55%;
+	top: -350px;
+}
+
+
+
+#cartBtn {
+	font-size: 25px;
+	cursor: Pointer;
+}
+
+.detail_box {
+	position: relative;
+	width: 500px;
+	height: 100px;
+	top: -190px;
+	left: 1085px;
+	background-color: #f9f6fd;
+}
+
+#button_div {
+	position: relative;
+	top: -147px;
+	left: 57%;
+	line-height: 50px;
+	display: flex;
+	flex-direction: column;
+}
+
+.price {
+	position: relative;
+	left: 168px;
+	top: 30px;
+}
+
+.vksaork {
+	position: relative;
+	top: -390px;
+	left: 1080px;
+	color: #3c3c3c;
+}
+
+#btn {
+	position: relative;
+	top: 0;
+	left: 52%;
+	transform: translateX(-50%);
+}
+
+.cartButton {
+	width: 500px;
+	height: 55px;
+	background-color: #222;
+	color: white;
+	border: none;
+}
+
+.vudwja {
+	position: relative;
+	top: -346px;
+	left: 1031px
+}
+
+.Star {
+	position: relative;
+	left: 168px;
+	top: 50px;
+}
+
+.orderButton {
+	width: 500px;
+	height: 55px;
+	background-color: #ff0063;
+	color: white;
+	border: none;
+}
+
+#buttons {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+#buttons li {
+	display: inline-block;
+	text-align: center;
+	width: 400px;
+	height: 2px;
+	line-height: -10px;
+	background-color: #aaa;
+	position: relative;
+	top: 10px;
+}
+
+#reviewList {
+	width: 1000px;
+	position: relative;
+	left: 500px;
+	text-align: center;
+	margin-bottom:100px;
+}
+
+#buttons a {
+	text-align: center;
+	font-size: 25px;
+	text-decoration: none;
+	color: black;
+	position: absolute;
+	top: -40px;
+	left: 170px;
+	font-size: 16px;
+}
+
+#detailPage {
+	width: 300px;
+	height: 50px;
+	background-color: lightgray;
+}
+
+.detailImg{
+	width: 700px;
+	margin-bottom: 100px;
+	position: relative;
+	left: 650px;
+}
+
+#reviewContent {
+	width: 100%;
+	height: 50px;
+}
+
+#qna {
+	width: 300px;
+	height: 50px;
+	background-color: lightgray;
+}
+
+#question {
+	text-align: center;
+	height: 100px;
+}
+
+.Star{
+	color:#ff0063;
+}
+

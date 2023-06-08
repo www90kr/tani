@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Tani</title>
+    <!-- favicons -->
+<link href="https://ifh.cc/g/VZXG5A.png" rel="icon">
+
+
+
+
+    <style>
+        @charset "UTF-8";
+
+
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+html {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: 15px;
+  color: var(--body-color);
+  background-color: var(--body-bg-color);
+  margin: 0;
+  font-weight: 600;
+  height:1230px;
+  min-height: -webkit-fill-available;
+
+}
+
+#navi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 93%;
+  left: 87%;
+  z-index: 99999999999;
+}
+
+#navi .navigation {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 2.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999620;
+}
+ 
+
+
+
+#navi ul {
+  display: flex;
+  list-style-type: none;
+}
+#navi ul a {
+  margin: 10px 30px;
+  position: relative;
+  color: #000;
+  font-family: "Oswald", sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+      top: -15px;
+}
+#navi ul a:before {
+  position: absolute;
+  bottom: -2px;
+  content: "";
+  width: 100%;
+  height: 3px;
+  background: #ff0063;
+  transform: translateX(-100%);
+  opacity: 0;
+}
+#navi ul a:hover:before {
+  opacity: 1;
+  transition: 0.5s transform ease, 0.8s opacity ease;
+  transform: translateX(0);
+}
+#navi ul .active {
+  color: #ff0063;
+}
+#naviul .active:hover:before {
+  opacity: 0;
+  
+}
+
+   #navBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1920px;
+    height: 85px;
+    z-index: 999999;
+    background: #fff;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.video-app {
+  display: flex;
+  flex-direction: column;
+  max-width: 1400px;
+  margin: 10 auto;
+  overflow: hidden;
+}
+
+
+.user-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.user-profile + svg {
+  width: 14px;
+}
+
+
+.menu-item.active {
+  color: var(--logo-color);
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-grow: 1;
+  background-color: var(--theme-bg-color);
+    justify-content: center; 
+    padding-top: 20px;
+}
+
+.side-wrapper:not(:last-child) {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.side-wrapper svg {
+  width: 20px;
+  fill: var(--body-color);
+  margin-right: 25px;
+  flex-shrink: 0;
+}
+
+.username {
+  color: var(--main-color);
+  font-size: 15px;
+}
+
+.side-menu a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--main-color);
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  white-space: nowrap;
+}
+.side-menu a:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.side-menu {
+  padding: 20px;
+}
+
+.side-title {
+  padding: 0 0 20px;
+  font-size: 15px;
+}
+
+
+
+.show-more {
+  margin-top: 20px;
+  padding: 12px 16px;
+}
+
+.left-side {
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-color);
+  overflow: auto;
+  flex-shrink: 0;
+}
+
+
+
+.profile {
+   height: 15vh;
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 1920px;
+    left: 0;
+    z-index: 9999;
+}
+
+
+
+.profile-menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: var(--header-bg-color);
+    width: 100%;
+    box-shadow: -1px 3px 8px -1px rgb(0 0 0 / 10%);
+    border-radius: 0 0 4px 4px;
+    padding: 10px 280px;
+    z-index: 2;
+}
+
+.profile-avatar {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.profile-name {
+  white-space: nowrap;
+    color: var(--main-color);
+}
+
+.menu-items {
+  display: flex;
+  cursor: pointer;
+}
+
+
+.profile-item svg {
+  width: 22px;
+  margin-right: 10px;
+}
+
+
+
+.trends {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 45px;
+}
+.trends a {
+  text-decoration: none;
+  color: var(--body-color);
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.trends svg {
+  width: 20px;
+  margin-right: 16px;
+}
+
+
+
+.view {
+  padding: 10px;
+  position: relative;
+  background-color: var(--header-bg-color);
+  z-index: 1;
+  font-size: 13px;
+}
+
+.load-more {
+  display: flex;
+  align-items: center;
+  /*justify-content: center;*/
+  padding: 30px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+}
+.load-more svg {
+  width: 16px;
+  margin-right: 15px;
+}
+.load-more:hover svg {
+  -webkit-animation: load 0.9s linear infinite;
+          animation: load 0.9s linear infinite;
+}
+
+
+
+@media (max-width: 1030px) {
+  .profile-name {
+    display: none;
+  }
+
+
+  .trends {
+    padding: 40px 10px;
+  }
+}
+
+  .profile-item {
+    padding: 20px 10px;
+  }
+
+
+@media (max-width: 840px) {
+  .profile-name {
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 6px;
+  }
+
+  .profile-menu {
+    flex-direction: column;
+  }
+
+  .menu-items {
+    order: 1;
+  }
+}
+@media (max-width: 980px) {
+  .videos {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .profile {
+    min-height: 380px;
+    max-height: 380px;
+  }
+}
+
+@media (max-width: 750px) {
+  .left-side {
+    display: fixed;
+  }
+
+  .header-menu {
+    display: none;
+  }
+
+  .search-bar input  {
+    max-width: 140px;
+  }
+
+
+}
+@media (max-width: 440px) {
+  .user-settings svg {
+    display: none;
+  }
+
+  .videos {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+@media (max-width: 475px) {
+
+  .side-menu {
+    position: relative;
+    top: 350px;
+    left: 0;
+  }
+  .con_nick {
+    position: relative;
+    top: 286px;
+    left: 50px;
+    display: flex;
+    align-items: center;
+  }
+  #nickname {
+     position: relative;
+    top: 50px;
+    left: -240px;
+    width: 500px;
+    margin: 10px;
+  }
+  #updatenickname {
+    position: relative;
+    left: 20px;
+    top: 0;
+  }
+  
+
+
+  
+
+
+
+
+
+#load-more {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    padding: 30px;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    position: relative;
+    top: 300px;
+}
+
+
+#nicknick span{
+	margin-top:25px;
+
+}
+
+
+
+#nickspan {
+   position: relative;
+    left: 150px;
+    top: -35px;
+    margin: 10px;
+}
+
+#nickname {
+    position: relative;
+    top: -16px;
+    left: 0;
+    width: 500px;
+    margin: 10px;
+}
+
+
+
+
+#email_msg {
+   position: relative;
+    left: 150px;
+    top: -35px;
+    margin: 10px;
+}
+
+#email {
+    position: relative;
+    top: -16px;
+    left: 0;
+    width: 500px;
+    margin: 10px;
+}
+
+
+#address {
+   position: relative;
+    top: -16px;
+    left: 0;
+    width: 500px;
+    margin: 10px;
+}
+
+
+#tel_msg {
+   position: relative;
+    left: 150px;
+    top: -35px;
+    margin: 10px;
+}
+
+#tel {
+    position: relative;
+    top: -16px;
+    left: 0;
+    width: 500px;
+    margin: 10px;
+}
+
+
+
+#password_msg {
+   position: relative;
+    left: 150px;
+    top: -35px;
+    margin: 10px;
+}
+
+#password {
+    position: relative;
+    top: -16px;
+    left: 0;
+    width: 500px;
+    margin: 10px;
+}
+
+.side-menu>a:hover {
+   color: #ff0063;
+}
+
+
+
+
+
+    </style>
+    
+       <script th:inline="javascript">
+      // 비로그인이면 anonymousUser
+      const loginInfo = /*[[${#authentication.principal}]]*/
+
+   </script>
+   <script>
+         let username1 = undefined;
+
+
+
+
+      $(document).ready(async function () {
+         //회원정보 출력
+         function printPage(data) {
+            $("#username").text(data.username);
+            $("#myname").text(data.name);
+            $("#mypassword").text(data.password);
+            $("#mynickname").text(data.nickname);
+            $("#myemail").text(data.email);
+            $("#mytel").text(data.tel);
+            $("#myaddress").text(data.address);
+         }
+
+         // 로그인한 사용자 아이디를 저장. 비로그인이면 null
+         if (loginInfo !== "anonymousUser") {
+            username1 = loginInfo.username;
+         }
+
+         console.log(username1);
+
+         const read = await $.ajax({
+            url: "/member/readmember",
+            data: {username: username1},
+            success: function (data) {
+               printPage(data.result);
+            }
+
+         })
+
+
+         console.log(read.result)
+
+
+         //닉네임변경
+         $(document).on("click", "#updatenickname", function () {
+
+            if ($("#newnickname_div").attr("value") == "show") {
+
+               $("#updatenickname").text("창닫기")
+
+               const $div = $("<div>").attr("id", "nickname_div").appendTo("#newnickname_div");
+               const $form = $("<form>").attr("id", "updatenicknameform").appendTo($div);
+               $("<input>").attr("name", "nickname").attr("id", "nickname").appendTo($form)
+               $("<button>").attr("id", "checkNickname").text("중복확인").appendTo($div);
+               $("<button>").attr("id", "updatenickname_btn").text("변경하기").appendTo($div)
+               $("#newnickname_div").attr("value", "hide");
+
+            }
+            else if ($("#newnickname_div").attr("value") == "hide") {
+
+               $("#newnickname_div").attr("value", "show");
+               $("#nickname_div").remove();
+               $("#updatenickname").text("변경하기")
+
+            }
+         })
+
+
+         $(document).on("click", "#checkNickname", async function (e) {
+            const paramNickname = {
+               nickname: $('#nickname').val()
+            };
+            const rn = await $.ajax({
+               url: "/member/check/nickname",
+               data: paramNickname,
+               method: "get"
+            })
+            $("#nickname_msg").children().remove();
+            $("<span>").text(rn.result).attr("id", "nickspan").attr("value", rn.result).appendTo("#nickname_msg");;
+         })
+      
+
+
+
+
+      $(document).on("click", "#updatenickname_btn", async function (e) {
+         e.stopPropagation();
+
+         console.log($('#nickname').val())
+
+         //const formdata = $("#updatenickname").serialize();
+         if ($("#nickspan").attr("value") == "사용할 수 있는 닉네임입니다") {
+            alert("닉네임을 변경하시겠습니까?")
+            await $.ajax({
+               url: '/member/update',
+               data: {nickname: $('#nickname').val()},
+               method: 'put',
+               success: function (data) {
+                  console.log(data)
+                  $("#mynickname").text(data.result.nickname);
+               }
+            }).done(() => location.href = '/member/read')
+         } else {
+            alert("변경 실패")
+         }
+
+      })
+
+
+
+
+
+
+
+
+      //이메일
+      $(document).on("click", "#updateemail", function () {
+
+         if ($("#newemail_div").attr("value") == "show") {
+
+            $("#updateemail").text("창닫기")
+
+            const $div = $("<div>").attr("id", "email_div").appendTo("#newemail_div");
+            const $form = $("<form>").attr("id", "updateemailform").appendTo($div);
+            $("<input>").attr("name", "email").attr("id", "email").appendTo($form)
+            $("<button>").attr("id", "checkEmail").text("중복확인").appendTo($div);
+            $("<button>").attr("id", "updateemail_btn").text("변경하기").appendTo($div)
+
+            $("#newemail_div").attr("value", "hide");
+
+         }
+
+         else if ($("#newemail_div").attr("value") == "hide") {
+            $("#newemail_div").attr("value", "show");
+            $("#email_div").remove();
+            $("#updateemail").text("변경하기")
+         }
+
+
+      })
+      $(document).on("click", "#checkEmail", async function () {
+         const paramEmail = {
+            email: $('#email').val()
+         };
+         const re = await $.ajax({
+            url: "/member/check/email",
+            data: paramEmail,
+            method: "get"
+         })
+         $("#email_msg").children().remove();
+         $("<span>").text(re.result).attr("id", "emailspan").attr("value", re.result).appendTo("#email_msg");
+      })
+
+
+
+      $(document).on("click", "#updateemail_btn", async function (e) {
+         e.stopPropagation();
+
+         console.log($('#email').val())
+
+         //const formdata = $("#updatenickname").serialize();
+         if ($("#emailspan").attr("value") == "사용할 수 있는 이메일입니다") {
+
+            alert("이메일을 변경하시겠습니까?")
+
+            await $.ajax({
+               url: '/member/update',
+               data: {email: $('#email').val()},
+               method: 'put',
+               success: function (data) {
+                  console.log(data)
+                  $("#myemail").text(data.result.email);
+               }
+            }).done(() => location.href = '/member/read')
+
+         } else {
+            alert("변경 실패")
+         }
+      })
+
+
+
+      //주소
+      $(document).on("click", "#updateaddress", function () {
+
+         if ($("#newaddress_div").attr("value") == "show") {
+
+            $("#updateaddress").text("창닫기")
+
+            const $div = $("<div>").attr("id", "address_div").appendTo("#newaddress_div");
+            const $form = $("<form>").attr("id", "updateaddressform").appendTo($div);
+            $("<input>").attr("name", "address").attr("id", "address").appendTo($form)
+            $("<button>").attr("id", "updateaddress_btn").text("변경하기").appendTo($div)
+
+            $("#newaddress_div").attr("value", "hide");
+
+         }
+
+         else if ($("#newaddress_div").attr("value") == "hide") {
+            $("#newaddress_div").attr("value", "show");
+            $("#address_div").remove();
+            $("#updateaddress").text("변경하기")
+         }
+
+
+      })
+
+      $(document).on("click", "#updateaddress_btn", function (e) {
+         e.stopPropagation();
+
+         console.log($('#address').val())
+
+         //const formdata = $("#updatenickname").serialize();
+
+         $.ajax({
+            url: '/member/update',
+            data: {address: $('#address').val()},
+            method: 'put',
+            success: function (data) {
+               console.log(data)
+               $("#myaddress").text(data.result.address);
+            }
+         })
+      })
+
+
+
+
+      //연락처
+
+      $(document).on("click", "#updatetel", function () {
+
+         if ($("#newtel_div").attr("value") == "show") {
+
+            $("#updatetel").text("창닫기")
+
+            const $div = $("<div>").attr("id", "tel_div").appendTo("#newtel_div");
+            const $form = $("<form>").attr("id", "updatetelform").appendTo($div);
+            $("<input>").attr("name", "tel").attr("id", "tel").appendTo($form);
+            $("<button>").attr("id", "checkTel").text("중복확인").appendTo($div);
+            $("<button>").attr("id", "updatetel_btn").text("변경하기").appendTo($div)
+
+            $("#newtel_div").attr("value", "hide");
+
+         }
+
+         else if ($("#newtel_div").attr("value") == "hide") {
+            $("#newtel_div").attr("value", "show");
+            $("#tel_div").remove();
+            $("#updatetel").text("변경하기")
+         }
+         $(document).on("click", "#checkTel", async function () {
+            const paramTel = {
+               tel: $('#tel').val()
+            };
+            const rt = await $.ajax({
+               url: "/member/check/tel",
+               data: paramTel,
+               method: "get"
+            })
+            $("#tel_msg").children().remove();
+            $("<span>").text(rt.result).attr("id", "telspan").attr("value", rt.result).appendTo("#tel_msg");;
+         })
+
+
+      })
+
+      $(document).on("click", "#updatetel_btn", async function (e) {
+         e.stopPropagation();
+
+         if ($("#telspan").attr("value") == "사용 가능한 전화번호입니다") {
+
+            alert("전화번호를 변경하시겠습니까?")
+            console.log($('#tel').val())
+
+
+            await $.ajax({
+               url: '/member/update',
+               data: {tel: $('#tel').val()},
+               method: 'put',
+               success: function (data) {
+                  $("#mytel").text(data.result.tel);
+                  //location.href=location.href
+                  console.log(data)
+               }
+            }).done(() => location.href = '/member/read')
+         } else {
+            alert("변경 실패")
+         }
+      })
+
+
+
+
+
+      //비밀번호
+
+      $(document).on("click", "#updatepassword", function () {
+
+         if ($("#newpassword_div").attr("value") == "show") {
+
+            $("#updatepassword").text("창닫기")
+
+            const $div = $("<div>").attr("id", "password_div").appendTo("#newpassword_div");
+            const $form = $("<form>").attr("id", "updatepasswordform").appendTo($div);
+            $("<input>").attr("name", "password").attr("id", "password").appendTo($form)
+            $("<button>").attr("id", "updatepassword_btn").text("변경하기").appendTo($div)
+
+            $("#newpassword_div").attr("value", "hide");
+
+
+         }
+
+         else if ($("#newpassword_div").attr("value") == "hide") {
+            $("#newpassword_div").attr("value", "show");
+            $("#password_div").remove();
+            $("#updatepassword").text("변경하기")
+         }
+
+
+      })
+
+      $(document).on("click", "#updatepassword_btn", function (e) {
+         e.stopPropagation();
+
+         console.log($('#password').val())
+
+         $.ajax({
+            url: '/member/update',
+            data: {password: $('#password').val()},
+            method: 'put',
+            success: function (data) {
+               console.log(data)
+               $("#mypassword").text(data.result.password);
+            }
+         }).done(alert("비밀번호가 변경되었습니다")).done(() => location.href = '/member/read')
+      })
+
+
+
+
+      $("#resign").click(async function () {
+
+          const resign = await $.ajax({
+             url: "http://localhost:8087/member/resign",
+             method: "get"
+          }).done(() => location.href = '/member/resign')
+       })
+       
+       })   ;
+
+
+   </script>
+   
+   
+
+   
+   
+</head>
+<body>
+
+
+     <nav id="nav" th:replace="/fragments/memNav">
+      </nav>
+      
+   <div id="navBox"></div>
+
+
+
+
+
+
+
+    <div class="video-app">
+
+        <div class="wrapper">
+         <div class="left-side">
+          <div class="side-wrapper">
+           <div class="side-menu" style="position: fixed;top: 200px;left: 20px;">
+
+            <a th:href="@{/member/read}">
+             <svg viewBox="0 0 512 512" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M210.35 246.63c33.88 0 63.22-12.15 87.2-36.13 23.97-23.97 36.12-53.3 36.12-87.19 0-33.87-12.15-63.2-36.13-87.19C273.57 12.15 244.23 0 210.35 0c-33.89 0-63.22 12.15-87.19 36.13s-36.13 53.3-36.13 87.18c0 33.89 12.16 63.23 36.13 87.2 23.98 23.97 53.32 36.12 87.2 36.12zm0 0M426.13 393.7a304.6 304.6 0 00-4.15-32.35 254.9 254.9 0 00-7.96-32.53 160.66 160.66 0 00-13.37-30.33 114.48 114.48 0 00-20.16-26.28c-7.96-7.61-17.7-13.73-28.97-18.2-11.22-4.44-23.66-6.69-36.97-6.69-5.23 0-10.28 2.14-20.05 8.5-6 3.92-13.03 8.45-20.87 13.46-6.71 4.27-15.8 8.28-27.02 11.9a107.28 107.28 0 01-33.04 5.34c-10.97 0-22.09-1.8-33.05-5.34-11.2-3.62-20.3-7.62-27-11.9-7.76-4.96-14.8-9.5-20.9-13.46-9.74-6.36-14.8-8.5-20.03-8.5-13.3 0-25.75 2.25-36.97 6.7-11.26 4.45-21 10.57-28.97 18.2a114.49 114.49 0 00-20.15 26.27c-5.56 9.78-10.06 19.99-13.38 30.34a255.5 255.5 0 00-7.95 32.52 303.52 303.52 0 00-4.15 32.36C.34 403.51 0 413.68 0 423.95c0 26.73 8.5 48.36 25.25 64.32C41.8 504.02 63.69 512 90.32 512h246.53c26.62 0 48.5-7.98 65.06-23.73 16.76-15.95 25.25-37.59 25.25-64.32 0-10.32-.35-20.5-1.03-30.25zm0 0" /></svg>
+             마이페이지
+            </a>
+
+
+            <a th:href="@{/member/acc/order/buylist}">
+                <svg viewBox="0 0 512.07 512.07" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M509.76 194.64c-6.15-18.86-22.95-31.04-42.78-31.04H339.06L298.78 41.27c-6.2-18.8-22.95-30.93-42.73-30.93h-.2c-19.85.08-36.6 12.35-42.67 31.26l-39.1 122H45.09c-19.88 0-36.69 12.22-42.81 31.14-6.12 18.92.33 38.68 16.45 50.33L123.1 320.5l-40.17 122c-6.21 18.87.14 38.65 16.18 50.39a44.86 44.86 0 0026.56 8.84c9.17 0 18.35-2.9 26.37-8.7l104.54-75.56 103.3 75.44c16.03 11.7 36.78 11.76 52.87.15s22.58-31.33 16.52-50.23L390.04 320.5l103.48-75.56c16.02-11.7 22.4-31.44 16.24-50.3z" /></svg>
+                구매내역
+            </a>
+
+            <a th:href="@{/member/resign}" id="resign">
+            <svg viewBox="0 0 515.6 515.6" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M496.7 212.2a64.4 64.4 0 11-91.2 91.1 64.4 64.4 0 0191.2-91M303.3 212.2a64.4 64.4 0 11-91 91.1 64.4 64.4 0 0191-91M110 212.2A64.4 64.4 0 1119 303.3a64.4 64.4 0 0191.1-91"></svg>
+                회원탈퇴
+            </a>
+
+            </div>
+          </div>
+
+ 
+         </div>
+         <div class="main-container" >
+          <div class="profile">
+           
+
+   
+            <div class="profile-avatar">
+             <div class="profile-name"><span id="mynickname" style="margin-right: 3px;"></span>(<span id="username" style="font-size: 14px; opacity: 80%;"></span>)</div>
+
+
+           </div>
+          </div>
+          <div class="trends">
+   
+
+          </div>
+
+
+ 
+          <div class="load-more">
+             <div id="nicknick">
+                <div style="color: var(--main-color);position: relative;top: 0px;font-size:22px; left: 50px;"> 회원 정보 수정</div>
+               <div id="Accordion_wrap">
+           
+          
+
+                  
+                 </div>
+                
+                  <span style="position: relative;left: 20px;"></br></br>아이디는 수정 불가합니다.</span>
+
+					</br></br>
+                  <span>닉네임 변경</span>
+              
+                  <span>
+                        <div style="position: relative;left: 20px;">
+                        <p style="color: #101010;"> 닉네임 <span id="mynickname" style="margin-left: 30px;"></span> <button id="updatenickname" type="button"style="margin-bottom: 10px;"> 변경하기 </button></p>
+                        
+                        <span id="nickname_msg"></span>
+                        <div id="newnickname_div" value="show"></div>
+                     </div>
+                  </span>
+              
+                 
+                 
+                  <span>이메일 변경</span>
+            
+                  <span>
+                        <div style="position: relative;left: 20px;">
+                        <p style="color: #101010;"> 이메일 <span id="myemail" style="margin-left: 30px;margin-right: 2px;"></span> <button id="updateemail" type="button" style="margin-bottom: 10px;"> 변경하기 </button></p>
+                        <span id="email_msg"></span>
+                        <div id="newemail_div" value="show"></div>
+                     </div>
+                  </span>
+                
+                 
+            
+                  <span>주소 변경</span>
+          
+                  <span>
+                        <div style="position: relative;left: 20px;">
+                        <p style="color: #101010;"> 주소 <span id="myaddress" style="margin-left: 30px;margin-right: 2px;"></span><button id="updateaddress" style="margin-bottom: 10px;"> 변경하기 </button> </p>
+                        <div id="newaddress_div" value="show"></div>
+                     </div>
+                  </span>
+              
+                 
+                
+                  <span>연락처 변경</span>
+
+                  <span>
+                        <div style="position: relative;left: 20px;">
+                        <p style="color: #101010;"> 연락처 <span id="mytel" style="margin-left: 30px;margin-right: 2px;"></span><button id="updatetel" style="margin-bottom: 10px;"> 변경하기 </button> </p>
+                        <span id="tel_msg"></span>
+                        <div id="newtel_div" value="show"></div>
+                     </div>
+                  </span>
+        
+                 
+               
+                  <span>비밀번호 변경</span>
+          
+                  <span>
+                        <div style="position: relative;left: 20px;">
+                        <p style="color: #101010;"> 비밀번호 : <span id="mypassword" style="margin-left: 30px;margin-right: 2px;"></span><button id="updatepassword" style="margin-bottom: 10px;"> 변경하기 </button></p>
+                        <div id="newpassword_div" value="show"></div>
+                     </div>
+                  </span>
+         
+            </div>
+             </div>
+
+
+          </div>
+
+
+         
+         
+        </div>
+       </div>
+   
+
+       
+</body>
+</html>

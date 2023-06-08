@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tani.demo.dao.OrderDao">
+
+	<!-- 주문처리 -->
+	<insert id="orderSave">
+		<selectKey keyProperty="orderNo" resultType="int" order="BEFORE">
+			select nvl(max(orderNo), 0)+1 from Orderr
+			<!-- select board_seq.nextval from dual -->
+		</selectKey>
+		insert into Orderr(orderNo, username,  shipName, shipAddr, orderPrice, orderDat)
+		values(#{orderNo}, #{username}, #{shipName}, #{shipAddr}, #{orderPrice},sysdate)
+	</insert>
+	
+	<!-- 총합 업데이트 -->
+	<update id="orderPriceUpdate">
+		update Orderr set orderPrice = #{orderPrice} where orderNo = #{orderNo} and username = #{username}
+	</update>
+	
+	<!-- 장바구니 삭제 -->
+	<delete id="cartAllDelete">
+		delete from Cart where username=#{username}
+	</delete>
+	
+	
+		<select id="buylistGet"
+		resultType="com.tani.demo.dto.BuyListDto$BuyList">
+		select po.orderDate,
+		p.name,
+		p.mainImg,
+		p.price,
+		poi.cartNum,
+		poi.odtStatus,
+		poi.odtNo,
+		poi.orderNo,
+		poi.code
+		from orderDetail poi left outer join orderr po on
+		poi.orderno=po.orderno
+		left outer join acc p on poi.code=p.code
+		where username=#{username}
+		
+	</select>
+
+	<!-- 배송상태 변경 -->
+	<update id="updateStatus">
+		update orderDetail set odtStatus='발송완료' where odtNo=#{odtNo}
+	</update>
+</mapper>
+
+

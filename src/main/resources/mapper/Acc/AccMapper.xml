@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tani.demo.dao.AccDao">
+	<!-- 카테고리 리스트 -->
+	<select id="ReadCateList" parameterType="String"
+		resultType="com.tani.demo.dto.AccDto$CategoryList">
+		select code,name,mainImg,price,cateCode from acc where cateCode=#{cateCode}
+	</select>
+
+	<!-- 용품 리스트 -->
+	<select id="accList"
+		resultType="com.tani.demo.dto.AccDto$AccList">
+		select code,name,mainImg,price,cateCode from acc order by name
+	</select>
+
+	<!-- 용품 개수 -->
+	<select id="countAcc" resultType="int">
+		select count(*) from acc
+	</select>
+
+	<!-- 페이징 -->
+	<select id="findAll"
+		resultType="com.tani.demo.dto.AccDto$AccList">
+		select * from
+		(
+		select rownum as rnum, p.* from
+		(select /*+
+		index_desc(acc acc_pk_code) */ code, mainImg, name,
+		price, cateCode from acc
+		order by code) p
+		where rownum &lt;=#{end}) where rnum&gt;=#{start}
+	</select>
+
+	<!-- 상세페이지 읽기 -->
+	<select id="AccDetail"
+		resultType="com.tani.demo.dto.AccDto$AccDetail">
+		select code,
+		name,
+		mainImg,
+		detailImg,
+		starAvg,
+		price
+		from acc
+		where code=#{code}
+	</select>
+	
+	<!-- 용품 개수 -->
+	<select id="countReview" resultType="int">
+		select count(*) from Review
+	</select>
+
+	<!-- 별점 평균 -->
+	<select id="getStarAvg" resultType="double">
+		select avg(Star)
+		from Review
+		where code=#{code}
+	</select>
+	
+	<!-- 별점 평균 업데이트 -->
+	<update id="updateStarAvg">
+		update acc set starAvg=#{starAvg} where code=#{code}
+	</update>
+
+	<resultMap type="int" id="reviewMap">
+		<result column="code" property="code"></result>
+	</resultMap>
+
+	<resultMap
+		type="com.tani.demo.dto.AccDto$ReadReviewList"
+		id="AddReviewMap">
+		<result column="reviewNo" property="reviewNo" />
+		<result column="Star" property="Star" />
+		<result column="reviewContent" property="reviewContent" />
+		<result column="username" property="username" />
+		<result column="reviewDate" property="reviewDate" />
+		<collection property="code" resultMap="reviewMap"></collection>
+	</resultMap>
+
+	<!-- 리뷰 목록페이지 가져오기 -->
+	<select id="reviewList" resultMap="AddReviewMap">
+		select r.reviewNo, r.Star, r.reviewContent, r.username, r.reviewDate,
+		p.code from Review r left outer join acc p on r.code=p.code
+		where p.code=#{code}
+	</select>
+</mapper>

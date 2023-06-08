@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tani.demo.dao.OrderDetailDao">
+
+	<!-- 주문상품 추가 -->
+	<insert id="orderDetailSave">
+		<selectKey keyProperty="odtNo" order="BEFORE" resultType="int">
+			select nvl(max(odtNo), 0)+1 from OrderDetail
+		</selectKey>	
+		insert into OrderDetail(odtNo, orderNo, code, cartNum, odtStatus)
+		values (#{odtNo}, #{orderNo}, #{code}, #{cartNum}, '발송준비중')
+	</insert>
+
+	<!--  장바구니 목록 가져오기  -->
+	<select id="cartListGet" resultType="com.tani.demo.dto.CartDto$list">
+		select cartNum, code from Cart where username = #{username}
+	</select>
+	
+	<!-- 상품 가격,수량 가져오기 -->
+	<select id="OrderInfo" resultType="com.tani.demo.dto.OrderDetailDto$PriceDto">
+		select poi.code, poi.cartNum, p.price
+		from orderDetail poi left outer join acc p 
+		on poi.code = p.code
+		left outer join Orderr po 
+		on po.orderNo = poi.orderNo
+		where poi.orderNo= #{orderNo} and po.username = #{username} 
+	</select>
+	
+	<!-- 주문번호 목록 가져오기 -->
+	<select id="OrderDetailByOrder" resultType="int">
+		select count(*) from OrderDetail where orderNo = #{orderNo}
+	</select>
+	
+	<!-- 주문내역 삭제 -->
+	<delete id="OrderDetailDelete">
+		delete from OrderDetail where orderNo = #{orderNo} and username = #{username}
+	</delete>
+</mapper>

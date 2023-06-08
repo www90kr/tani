@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tani.demo.dao.CartDao">
+	
+	<!-- 장바구니 추가 -->
+	<insert id="addCart">
+		<selectKey keyProperty="cartNo" resultType="int" order="BEFORE">
+			select nvl(max(cartNo), 0)+1 from cart
+			<!-- select board_seq.nextval from dual -->
+		</selectKey>
+		insert into cart(cartNo, cartNum, username, code)
+		 values(#{cartNo}, #{cartNum}, #{username}, #{code})
+	</insert>
+
+	<!-- 기존 장바구니에 추가 -->
+	<update id="cartPlus">
+		update cart set cartNum = cartNum + #{cartNum} where code = #{code} and username = #{username}
+	</update>
+
+	<!-- 동일상품 확인  -->
+	<select id="checkCart" resultType="boolean">
+		select count(code) from cart where code = #{code} and username = #{username}
+	</select>
+
+	<!--  장바구니 삭제 -->
+	<delete id="cartDelete">
+		delete from cart where cartNo=#{cartNo}
+	</delete>
+	
+	<!-- 장바구니 조회(삭제시 필요) -->
+	<select id="findByCartNo" resultType="int">
+		select cartNo from cart where code = #{code}
+	</select>
+	
+	<!-- 수량변경 -->
+	<update id="cartNumPlusCount">
+		update cart set cartNum = cartNum + 1 where cartNo = #{cartNo}
+	</update>
+	
+	<update id="cartNumMinusCount">
+		update cart set cartNum = cartNum - 1 where cartNo = #{cartNo}
+	</update>
+	
+	<!-- 장바구니 리스트 -->
+	<select id="listCart" resultType="com.tani.demo.dto.CartDto$Read">
+		select a.cartNo, a.username, a.code, a.cartNum, b.name, b.price, b.mainImg
+		from cart a left outer join acc b on a.code = b.code
+		where username=#{username}
+	</select>
+	
+	<!-- 장바구니 수량 가져오기(수량변경시 필요) -->
+	<select id="getCount" resultType="integer">
+		select cartNum from cart where cartNo = #{cartNo}
+	</select>
+	
+	<!-- 장바구니 용품갯수(구매하기 저장시 필요) -->
+	<select id="cartListSize" resultType="int">
+		select count(*) from cart where username = #{username}
+	</select>
+
+	
+</mapper>
